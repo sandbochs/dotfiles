@@ -8,6 +8,10 @@ export NVM_DIR="/Users/elliot/.nvm"
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+# Antigen
+source ~/.dotfiles/antigen/antigen.zsh
+source ~/.dotfiles/bundle.zsh
 
 # Aliases
 source ~/.dotfiles/aliases.zsh
@@ -21,7 +25,3 @@ source ~/.dotfiles/keys.zsh
 
 # History
 source ~/.dotfiles/history.zsh
-
-# Antigen
-source ~/.dotfiles/antigen/antigen.zsh
-source ~/.dotfiles/bundle.zsh
