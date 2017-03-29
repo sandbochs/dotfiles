@@ -1,0 +1,134 @@
+[alias]
+  # add
+  a = add
+  chunkyadd = add --patch
+
+  # branch
+  b = branch
+
+  # commit
+  c = commit -m
+  ca = commit -am
+  ci = commit
+  amend = commit --amend
+  ammend = commit --amend
+
+  # checkout
+  co = checkout
+  nb = checkout -b
+  cd = checkout develop
+
+  # cherry-pick
+  cp = cherry-pick -x
+
+  # diff
+  d = diff
+  dc = diff --cached
+  last = diff HEAD~1
+
+  # log
+  l = log --graph --date=short
+  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+  short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+  changelog = log --pretty=format:\" * %s\"
+  shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+  # pull
+  pl = pull
+
+  # push
+  ps = push
+
+  # rebase
+  rod = rebase origin/develop
+  rc = rebase --continue
+  rs = rebase --skip
+
+  # remote
+  r = remote -v
+
+  # unstage
+  unstage = reset HEAD~1
+  uncommit = reset --soft HEAD~1
+  filelog = log -u
+  mt = mergetool
+
+  # stash
+  ss = stash
+  sl = stash list
+  sa = stash apply
+  sd = stash drop
+
+  # status
+  s = status
+  st = status
+  sta = status
+  stat = status
+  statu = status
+
+  # tag
+  t = tag -n
+
+  # custom
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  snapshots = !git stash list --grep snapshot
+  recent-branches = !git for-each-ref --count=5 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+
+[format]
+    pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+
+[mergetool]
+    prompt = false
+
+[mergetool "mvimdiff"]
+    cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+      keepbackup=false
+
+[merge]
+    summary = true
+      verbosity = 1
+        tool = mvimdiff
+
+[apply]
+    whitespace = nowarn
+
+[branch]
+    autosetupmerge = true
+
+[push]
+  # 'git push' will push the current branch to its tracking branch
+  # the usual default is to push all branches
+  default = tracking
+
+[core]
+  autocrlf = false
+  editor = vim
+
+[advice]
+  statusHints = false
+
+[diff]
+    # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
+    # instead of a/b/c/d as prefixes for patches
+    mnemonicprefix = true
+      algorithm = patience
+
+[user]
+	name = Elliot Shiu
+	email = elliot@sandbochs.com
+[github]
+	user = sandbochs
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[color]
+	ui = auto
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
