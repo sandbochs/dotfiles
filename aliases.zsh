@@ -26,9 +26,14 @@ alias pgdown="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.p
 alias laws='aws --endpoint-url http://localhost:8000 --region fakeRegion'
 
 # LX Aliases
-alias gw='cd ~/env/dev/ui/; npm run watch'
+alias gw='cd ~/env/dev/ui/; yarn watch -- --max-old-space-size=4096'
 alias envtest="MIGRATION_ENV=test npm run mocha -t 4000"
 alias spl='cd ~/env/dev/database-workers/; npm run start-pusher-listen'
+alias latest='cd ~/env/dev/api; ./bin/db latest_production && lxkill all && ./bin/db restore lanetix backups/latest.sql'
+alias upstack='lxstack sandbochs -i arn:aws:cognito-identity:us-east-1:873849189842:identitypool/us-east-1:6c0fee05-43d4-4d86-9c6e-c25d75473d33 -r Cognito_LanetixDevInboxAuth_Role'
+alias mystack='mv ~/.lx.mystack.env ~/.lx.aws.env && src'
+alias devstack='mv ~/.lx.aws.env ~/.lx.mystack.env && src'
 
 # Functions
 psp () { lsof -n -i4TCP:$@ | grep LISTEN; }
+psa () { LOCAL_DYNAMODB=true ~/env/dev/ui/node_modules/mocha/bin/mocha $@ --opts client/test/mocha.opts --max-old-space-size=3062; }
