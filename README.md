@@ -1,8 +1,10 @@
-dotfiles
-----------------
+# dotfiles
+
+### Backing Up
+- copy ~/.sandbochs & ~/.ssh
+- check in and push and changes to ~/.dotfiles
 
 ### Installation (I should script this...)
-----------------
 
 - `git clone --recursive git@github.com:sandbochs/dotfiles.git ~/.dotfiles`
 -`ln -s ~/.dotfiles/zshrc ~/.zshrc`
