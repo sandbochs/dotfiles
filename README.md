@@ -18,3 +18,7 @@ dotfiles
 - `chmod 700 ~/dein.installer.sh`
 - `~/dein.installer.sh ~/.cache/dein`
 - Open nvim and run: `:call dein#install()`
+- `mkdir -p ~/.tmux/plugins`
+- `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+- `tmux`
+- `ctrl-a + I`
