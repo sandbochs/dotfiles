@@ -1,13 +1,16 @@
 # Homebrew
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
 
-# PG 9.5
-# 9.6 goes bonkers on macOS Sierra
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+# Pip Bin
+export PATH="/Users/elliot/Library/Python/2.7/bin:$PATH"
 
 # NVM
 export NVM_DIR="/Users/elliot/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH=./node_modules/.bin:$PATH
+
+# Postgres App
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -25,8 +28,14 @@ source ~/.dotfiles/aliases.zsh
 source ~/.dotfiles/keybind.zsh
 
 # ENV
-source ~/.dotfiles/lanetix.zsh
 source ~/.dotfiles/keys.zsh
 
 # History
 source ~/.dotfiles/history.zsh
+
+# work
+source ~/.sandbochs/work.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# Add Go
+export PATH="$PATH:$HOME/.rvm/bin:/usr/local/go/bin"

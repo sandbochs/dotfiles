@@ -1,17 +1,9 @@
-# PG 9.5
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
-
 # NVM
 export NVM_DIR="/Users/elliot/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# LX
-source ~/.lanetix.env
-source ~/env/.lxprofile
-export LAUNCH_DARKLY_ENVIRONMENT_KEY="sdk-f8b92d72-a860-436a-ace4-665f0ea1859e"
 
 # Aliases
 alias vi="nvim"
@@ -46,3 +38,7 @@ alias laws='aws --endpoint-url http://localhost:8000 --region fakeRegion'
 # Functions
 psp () { lsof -n -i4TCP:$@ | grep LISTEN; }
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

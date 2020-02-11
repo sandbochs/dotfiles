@@ -35,7 +35,21 @@ set hidden
 " command in visual mode so that it doesn't overwrite
 " whatever is in your paste buffer.
 "
-vnoremap p "_dP
+"vnoremap p "_dP
+
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+set cb=unnamedplus
 
 " Keymappings
 imap jk <Esc>
@@ -53,6 +67,11 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 tmap <C-j> <C-\><C-n>
+
+" NVim Terminal
+tnoremap <Esc> <C-\><C-n>
+tnoremap jk <C-\><C-n>
+tnoremap jj <C-\><C-n>
 
 " Indentation
 set autoindent
@@ -125,38 +144,38 @@ if dein#load_state('/Users/elliot/.cache/dein')
   call dein#add('/Users/elliot/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  " My plugins
   call dein#add('mhartington/oceanic-next')
   call dein#add('vim-airline/vim-airline')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('mhartington/oceanic-next')
-  call dein#add('othree/yajs.vim.git')
-  call dein#add('othree/javascript-libraries-syntax.vim')
+  "call dein#add('othree/yajs.vim.git')
+  "call dein#add('othree/javascript-libraries-syntax.vim')
+  call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
-  call dein#add('gavocanov/vim-js-indent')
+  "call dein#add('gavocanov/vim-js-indent')
   call dein#add('edkolev/tmuxline.vim.git')
   call dein#add('scrooloose/nerdtree.git')
   call dein#add('jistr/vim-nerdtree-tabs.git')
   call dein#add('tpope/vim-repeat.git')
   call dein#add('tpope/vim-surround.git')
-  call dein#add('tpope/vim-rails.git')
+  "call dein#add('tpope/vim-rails.git')
   call dein#add('vim-ruby/vim-ruby.git')
   call dein#add('vim-scripts/matchit.zip.git')
   call dein#add('tpope/vim-endwise.git')
-  call dein#add('mileszs/ack.vim')
+  "call dein#add('mileszs/ack.vim')
   call dein#add('rking/ag.vim')
-  call dein#add('mattn/webapi-vim')
   call dein#add('mattn/gist-vim')
   call dein#add('godlygeek/tabular')
   call dein#add('AndrewRadev/splitjoin.vim')
   call dein#add('nathanaelkane/vim-indent-guides')
-  call dein#add('tpope/vim-haml')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('chrisbra/color_highlight.git')
+  "call dein#add('tpope/vim-haml')
+  "call dein#add('kchmck/vim-coffee-script')
+  "call dein#add('chrisbra/color_highlight.git')
   call dein#add('vim-scripts/camelcasemotion.git')
   call dein#add('gregsexton/gitv')
   call dein#add('briandoll/change-inside-surroundings.vim.git')
@@ -170,10 +189,14 @@ if dein#load_state('/Users/elliot/.cache/dein')
   call dein#add('majutsushi/tagbar.git')
   call dein#add('tomtom/tcomment_vim.git')
   call dein#add('tomtom/tlib_vim.git')
-  call dein#add('digitaltoad/vim-jade')
+  "call dein#add('digitaltoad/vim-jade')
   call dein#add('wavded/vim-stylus')
   call dein#add('gcmt/taboo.vim')
   call dein#add('ryanoasis/vim-devicons')
+  call dein#add('w0rp/ale')
+  call dein#add('haya14busa/incsearch.vim')
+  call dein#add('haya14busa/incsearch-fuzzy.vim')
+  call dein#add('haya14busa/incsearch-easymotion.vim')
 
   " Required:
   call dein#end()
@@ -196,8 +219,9 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-let g:used_javascript_libs='underscore,react,chai,jquery'
+"let g:used_javascript_libs='underscore,react,chai,jquery'
 let g:jsx_ext_required=0
+let g:javascript_plugin_flow = 1
 
 syntax enable
 colorscheme OceanicNext
@@ -247,3 +271,25 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
 nmap <leader>w :StripTrailingWhitespaces<CR>
+
+" Asynchronous Lint Engine (ale)
+let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_fixers = { 'javascript': ['eslint', 'prettier'] }
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_enter = 1
+
+" incsearch fuzzy easymotion
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+" resize window
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
