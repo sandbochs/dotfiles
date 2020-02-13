@@ -19,11 +19,11 @@ alias gcm="git commit -m"
 alias gwip="git commit -am 'wip'; git status"
 alias jobs='jobs -dlp'
 alias ns='nvm use; npm start'
-alias nm='nodemon --exec npm start -e js,sql'
-alias cognito='aws cognito-identity'
-alias pgup="rm -f /usr/local/var/postgres/postmaster.pid && launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-alias pgdown="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
+# ChromeOS
+alias max="tilix --maximize --window-style=borderless && source /etc/profile.d/vte.sh"
+alias pgstart="sudo systemctl start postgresql@11-main"
+alias pgstop="sudo systemctl stop postgresql@11-main"
 alias mvfix='rm -rf ~/.zcompdump*'
 
 # Functions

@@ -1,16 +1,10 @@
-# Homebrew
-export PATH="/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:$PATH"
-
-# Pip Bin
-export PATH="/Users/elliot/Library/Python/2.7/bin:$PATH"
-
 # NVM
-export NVM_DIR="/Users/elliot/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PATH=./node_modules/.bin:$PATH
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Postgres App
-export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+# Golang
+export PATH=$PATH:/usr/local/go/bin
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -36,6 +30,18 @@ source ~/.dotfiles/history.zsh
 # work
 source ~/.sandbochs/work.zsh
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# Add Go
-export PATH="$PATH:$HOME/.rvm/bin:/usr/local/go/bin"
+# Tilix
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+# Extraterm
+source /opt/extraterm-commands-0.49.1/setup_extraterm_zsh.zsh
+
+# ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+fi

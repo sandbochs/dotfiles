@@ -122,7 +122,7 @@ set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*node_modules
 
 " FZF
-set rtp+=/usr/local/opt/fzf
+set rtp+=/home/elliot.shiu/.fzf
 
 " Fonts
 set encoding=utf-8
@@ -133,15 +133,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/elliot/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/elliot.shiu/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/elliot/.cache/dein')
-  call dein#begin('/Users/elliot/.cache/dein')
+if dein#load_state('/home/elliot.shiu/.cache/dein')
+  call dein#begin('/home/elliot.shiu/.cache/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/elliot/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('/home/elliot.shiu/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   " You can specify revision/branch/tag.
