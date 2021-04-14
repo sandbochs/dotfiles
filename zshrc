@@ -12,11 +12,6 @@ export PATH=./node_modules/.bin:$PATH
 # Postgres App
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
-# FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
 # Antigen
 source ~/.dotfiles/antigen/antigen.zsh
 source ~/.dotfiles/bundle.zsh
@@ -39,3 +34,9 @@ source ~/.sandbochs/work.zsh
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # Add Go
 export PATH="$PATH:$HOME/.rvm/bin:/usr/local/go/bin"
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
