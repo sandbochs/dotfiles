@@ -4,24 +4,17 @@
 - copy ~/.sandbochs & ~/.ssh
 - check in and push and changes to ~/.dotfiles
 
-### Installation (I should script this...)
+### Installation
 
 - Install [homebrew](https://brew.sh/)
 - `git clone --recursive git@github.com:sandbochs/dotfiles.git ~/.dotfiles`
-- `ln -s ~/.dotfiles/zshrc ~/.zshrc`
-- `ln -s ~/.dotfiles/bashrc ~/.bashrc`
-- `ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf`
-- `ln -s ~/.dotfiles/gitconfig ~/.gitconfig`
-- `brew install neovim`
-- `brew install fzf`
-- `mkdir -p ~/.config/nvim`
-- `ln -s ~/.dotfiles/init.vim ~/.config/nvim/init.vim`
-- `curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/dein.installer.sh`
-- `mkdir -p ~/.cache/dein`
-- `chmod 700 ~/dein.installer.sh`
-- `~/dein.installer.sh ~/.cache/dein`
+- `chmod +x ~/.dotfiles/install.sh`
+- `~/.dotfiles/install.sh`
 - Open nvim and run: `:call dein#install()`
-- `mkdir -p ~/.tmux/plugins`
-- `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 - `tmux`
 - `ctrl-a + I`
+
+### Post Install
+- Install iterm2
+- Import iterm2 profile from ~/.dotfiles/iterm.json
+- Install font [DroidSansMonoNerdFontComplete](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DroidSansMono)
