@@ -7,12 +7,28 @@
 ### Installation
 
 - Install [homebrew](https://brew.sh/)
-- `git clone --recursive git@github.com:sandbochs/dotfiles.git ~/.dotfiles`
-- `chmod +x ~/.dotfiles/install.sh`
-- `~/.dotfiles/install.sh`
-- Open nvim and run: `:call dein#install()`
-- `tmux`
-- `ctrl-a + I`
+```sh
+git clone --recursive git@github.com:sandbochs/dotfiles.git ~/.dotfiles
+```
+
+```sh
+chmod +x ~/.dotfiles/install.sh
+```
+```sh
+~/.dotfiles/install.sh
+```
+
+```sh
+nvim
+```
+
+`:call dein#install()`
+
+```sh
+tmux
+```
+
+`ctrl-a + I`
 
 ### Post Install
 - Install iterm2
