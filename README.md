@@ -6,7 +6,7 @@
 
 ### Installation
 
-- Install [homebrew](https://brew.sh/)
+Install [homebrew](https://brew.sh/)
 ```sh
 git clone --recursive git@github.com:sandbochs/dotfiles.git ~/.dotfiles
 ```
