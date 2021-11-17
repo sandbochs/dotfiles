@@ -114,8 +114,8 @@
       algorithm = patience
 
 [user]
-	name = Elliot Shiu
-	email = elliot.shiu@bitmex.com
+	name = sandbochs
+	email = sandbochs@github.com
 [github]
 	user = sandbochs
 [filter "media"]
@@ -133,3 +133,5 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main

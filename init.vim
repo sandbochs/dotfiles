@@ -69,9 +69,12 @@ nmap <C-l> <C-w>l
 tmap <C-j> <C-\><C-n>
 
 " NVim Terminal
-tnoremap <Esc> <C-\><C-n>
 tnoremap jk <C-\><C-n>
 tnoremap jj <C-\><C-n>
+if has("nvim")
+  au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au FileType fzf tunmap <buffer> <Esc>
+endif
 
 " Indentation
 set autoindent
@@ -122,7 +125,7 @@ set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*node_modules
 
 " FZF
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/bin/fzf
 
 " Fonts
 set encoding=utf-8
@@ -197,6 +200,8 @@ if dein#load_state('/Users/elliot/.cache/dein')
   call dein#add('haya14busa/incsearch.vim')
   call dein#add('haya14busa/incsearch-fuzzy.vim')
   call dein#add('haya14busa/incsearch-easymotion.vim')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " Required:
   call dein#end()
