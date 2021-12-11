@@ -1,3 +1,10 @@
+# Install xcode commandline tools
+XCLT_INSTALL="$(xcode-select -p 2>&1 >/dev/null | grep -o error)"
+if [[ XCLT_INSTALL = "error" ]]
+then
+  xcode-select --install
+fi
+
 # Link dotfiles
 ln -s ~/.dotfiles/zshrc ~/.zshrc
 ln -s ~/.dotfiles/bashrc ~/.bashrc
