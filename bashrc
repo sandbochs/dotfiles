@@ -16,3 +16,4 @@ alias vrc="vi ~/.bash_profile"
 psp () { lsof -n -i4TCP:$@ | grep LISTEN; }
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"

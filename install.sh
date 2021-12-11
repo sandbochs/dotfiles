@@ -8,6 +8,9 @@ ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 brew install neovim
 brew install fzf
 brew install tmux
+brew install ag
+brew install jq
+brew install miller
 
 # Configure neovim
 mkdir -p ~/.config/nvim
@@ -21,3 +24,6 @@ rm ~/dein.installer.sh
 # Install tmux plugin manager
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash

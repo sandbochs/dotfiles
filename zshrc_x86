@@ -1,0 +1,21 @@
+# export X86_HOME="/Users/elliot/x86"
+#
+# # Homebrew
+local brew_path="/usr/local/Homebrew"
+eval "$(/usr/local/Homebrew/bin/brew shellenv)"
+export PATH="${brew_path}/bin:${PATH}"
+
+# NVM
+export NVM_DIR="$X86_HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Rust
+export PATH="/Users/elliot/.cargo/bin:${PATH}"
+. "/Users/elliot/.cargo/env"
+export PQ_LIB_DIR="$(brew --prefix libpq)/lib"
+
+# libpq
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/libpq/lib"
+export CPPFLAGS="-I/usr/local/opt/libpq/include"
