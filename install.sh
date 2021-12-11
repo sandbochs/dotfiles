@@ -1,3 +1,10 @@
+# Install homebrew
+BREW_INSTALL="$(which brew | grep -o 'not found')"
+if [[ BREW_INSTALL = "not found" ]]
+then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 # Install xcode commandline tools
 XCLT_INSTALL="$(xcode-select -p 2>&1 >/dev/null | grep -o error)"
 if [[ XCLT_INSTALL = "error" ]]
