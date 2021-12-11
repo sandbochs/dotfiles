@@ -11,6 +11,10 @@ ln -s ~/.dotfiles/bashrc ~/.bashrc
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 
+# link ssh config
+mkdir -p ~/.ssh
+ln -s ~/.dotfiles/ssh_config ~/.ssh/config
+
 # Install bins
 brew install neovim
 brew install fzf
