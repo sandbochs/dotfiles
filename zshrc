@@ -57,3 +57,6 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 
 # https://gpanders.com/blog/the-definitive-guide-to-using-tmux-256color-on-macos/
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
+
+# Subl
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
