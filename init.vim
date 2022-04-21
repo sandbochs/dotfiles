@@ -85,6 +85,18 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
+" FILETYPES 
+" Solidity
+au FileType solidity setlocal ts=4 sts=4 sw=4
+
+" Typescript React
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+
+" Typescript Specific Config
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 " Turn off Swap Files
 set noswapfile
 set nobackup
@@ -156,6 +168,7 @@ if dein#load_state('/Users/elliot/.cache/dein')
   call dein#add('mhartington/oceanic-next')
   call dein#add('vim-airline/vim-airline')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-abolish')
   "call dein#add('othree/yajs.vim.git')
   "call dein#add('othree/javascript-libraries-syntax.vim')
   call dein#add('pangloss/vim-javascript')
@@ -187,7 +200,6 @@ if dein#load_state('/Users/elliot/.cache/dein')
   call dein#add('MarcWeber/vim-addon-mw-utils.git')
   call dein#add('tpope/vim-markdown.git')
   call dein#add('jtratner/vim-flavored-markdown.git')
-  call dein#add('skwp/vim-easymotion')
   call dein#add('groenewege/vim-less.git')
   call dein#add('majutsushi/tagbar.git')
   call dein#add('tomtom/tcomment_vim.git')
@@ -199,9 +211,18 @@ if dein#load_state('/Users/elliot/.cache/dein')
   call dein#add('w0rp/ale')
   call dein#add('haya14busa/incsearch.vim')
   call dein#add('haya14busa/incsearch-fuzzy.vim')
-  call dein#add('haya14busa/incsearch-easymotion.vim')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  call dein#add('TovarishFin/vim-solidity')
+  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+					\ 'build': 'sh -c "cd app && yarn install"' })
+
+  " Typescript
+  call dein#add('prettier/vim-prettier', {'build': 'npm install'})
+  call dein#add('peitalin/vim-jsx-typescript')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('jparise/vim-graphql')
+  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
 
   " Required:
   call dein#end()
@@ -231,6 +252,30 @@ let g:javascript_plugin_flow = 1
 syntax enable
 colorscheme OceanicNext
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" CoC
+let g:coc_global_extensions = ['coc-tsserver']
+nnoremap <silent> K :call CocAction('doHover')<CR>
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 " Airline
 set laststatus=2
@@ -278,22 +323,9 @@ command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
 nmap <leader>w :StripTrailingWhitespaces<CR>
 
 " Asynchronous Lint Engine (ale)
-let g:ale_linters = { 'javascript': ['eslint', 'flow-language-server'] }
-let g:ale_fixers = { 'javascript': ['eslint', 'prettier'] }
+let g:ale_linters = { 'javascript': ['eslint'], 'typescript': ['eslint'] }
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 1
-
-" incsearch fuzzy easymotion
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 " resize window
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>

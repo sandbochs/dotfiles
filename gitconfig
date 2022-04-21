@@ -100,10 +100,6 @@
   # the usual default is to push all branches
   default = tracking
 
-[core]
-  autocrlf = false
-  editor = vim
-
 [advice]
   statusHints = false
 

@@ -1,4 +1,4 @@
-# export X86_HOME="/Users/elliot/x86"
+export X86_HOME="/Users/elliot/.x86"
 #
 # # Homebrew
 local brew_path="/usr/local/Homebrew"

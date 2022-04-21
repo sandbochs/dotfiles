@@ -17,8 +17,11 @@ alias gau="git add -u; git status"
 alias gcam="git commit -am"
 alias gcm="git commit -m"
 alias gwip="git commit -am 'wip'; git status"
+alias tl="tmux list-sessions"
+alias tk="tmux kill-session -t"
 
 alias mvfix='rm -rf ~/.zcompdump*'
 
 # Functions
 psp () { lsof -n -i4TCP:$@ | grep LISTEN; }
+pspk () { lsof -n -i4TCP:$@ | grep LISTEN | awk '{ print $2 }' | xargs -I '{}' kill '{}'; }
