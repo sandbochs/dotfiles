@@ -25,3 +25,6 @@ alias mvfix='rm -rf ~/.zcompdump*'
 # Functions
 psp () { lsof -n -i4TCP:$@ | grep LISTEN; }
 pspk () { lsof -n -i4TCP:$@ | grep LISTEN | awk '{ print $2 }' | xargs -I '{}' kill '{}'; }
+lc() { echo $@ | tr '[:upper:]' '[:lower:]' | tr -d "\n" | pbcopy }
+
+setgd () { export GIT_AUTHOR_DATE=$@ && export GIT_COMMITTER_DATE=$GIT_AUTHOR_DATE; }
